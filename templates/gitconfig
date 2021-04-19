@@ -1,0 +1,49 @@
+[core]
+	pager = delta
+	editor = code --wait
+
+[diff]
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	features = line-numbers decorations
+	syntax-theme = Dracula
+	plus-style = syntax "#003800"
+	minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ul
+	file-style = bold yellow ul
+	file-decoration-style = none
+	hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+	line-numbers-left-style = cyan
+	line-numbers-right-style = cyan
+	line-numbers-minus-style = 124
+	line-numbers-plus-style = 28
+
+[alias]
+	# List available aliases
+	alias = !git config -l | grep alias | cut -c 7-
+	# Shortcuts git
+	fixup = commit --fixup
+	amend = commit --amend
+	ls = log --pretty=format:'%C(yellow)%h %C(green) %cr%C(red) %d%C(reset) %s%C(bold blue) <%an>%C(reset)' --abbrev-commit
+	lg = log --pretty=format:'%C(yellow)%h %C(green) %cr%C(red) %d%C(reset) %s%C(bold blue) <%an>%C(reset)' --abbrev-commit --graph
+	stat = show --stat --oneline
+	# Make file executable (chmod +x)
+	exec = "!f() { if [ -f $1 ]; then git update-index --chmod=+x --add $1; else echo 'Invalid file'; exit 1; fi; }; f"
+	# List range of commits in human-readable way
+	devnotes = "!f() { SECTION=''; if [ ! -z $1 ] && [ ! -z $2 ]; then SECTION=$1..$2; fi; git log --date=short --stat --pretty='format:[%ad %C(cyan)%aN%Creset] %s %b' --abbrev-commit $SECTION; }; f"
+	dn = !git devnotes
+	relnotes = "!f() { SECTION=''; if [ ! -z $1 ] && [ ! -z $2 ]; then SECTION=$1..$2; fi; git log --pretty='format:[%C(cyan)%aN%Creset @ %C(yellow)%h%Creset] %s %b' --abbrev-commit $SECTION --no-merges; }; f"
+	rn = !git relnotes
+	# Grep in git index
+	grep = !git ls-files | grep -i

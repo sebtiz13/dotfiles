@@ -1,0 +1,2 @@
+# Replace ² by ` in AZERTY keyword
+keycode 49 = grave twosuperior grave twosuperior asciitilde asciitilde asciitilde

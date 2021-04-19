@@ -1,0 +1,79 @@
+# SHELL config
+setopt appendhistory                                            # Immediately append history instead of overwriting
+setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt autocd                                                   # if only directory path is entered, cd there.
+setopt inc_append_history                                       # save commands are added to the history immediately, otherwise only when shell exits.
+HISTFILE=$HOME/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of $HOME/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+ASDF_DIR=/usr/share/asdf
+ASDF_DATA_DIR=$HOME/.asdf
+
+export ZSH=/usr/share/oh-my-zsh
+export ZSH_CUSTOM=$ZSH/custom
+
+ZSH_THEME="${theme}"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# set variable before loading its plugin
+ZSH_AUTOSUGGEST_USE_ASYNC=1
+
+# Which plugins would you like to load? (plugins can be found in $HOME/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to $HOME/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=( ${plugins} )
+
+# Use user cache directory
+export ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
+if ! [ -d $ZSH_CACHE_DIR ]; then
+  mkdir $ZSH_CACHE_DIR
+fi
+
+source $ZSH/oh-my-zsh.sh
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vi'
+else
+  export EDITOR='code'
+fi
+
+# Default fzf options
+export FZF_DEFAULT_OPTS="--height 80%"
+# Add tree preview on ALT+C shortcut
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200' --reverse"
+
+# Load shared function and aliases
+SHARE_DIR=/usr/share/personal-env
+source $SHARE_DIR/functions.sh
+source $SHARE_DIR/aliases.sh
+
+# Store your own aliases in the $HOME/.aliases file and load the here.
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+
+# Encoding stuff for the terminal
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
