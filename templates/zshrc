@@ -14,13 +14,22 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Replace OMZ theme by Maia prompt for login shell (TTY)
+if [[ "$(basename "$(cat "/proc/$PPID/comm")")" == "login" ]]; then
+  # enable substitution for prompt
+  setopt prompt_subst
+  # Maia prompt
+  PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b %(!.%F{red}.%F{cyan})%n%f@%F{yellow}%m%f%(!.%F{red}.)%f >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b"
+  RPROMPT="%{$fg[red]%} %(?..[%?])"
+else
+  ZSH_THEME="${theme}"
+fi
+
 ASDF_DIR=/usr/share/asdf
 ASDF_DATA_DIR=$HOME/.asdf
 
 export ZSH=/usr/share/oh-my-zsh
 export ZSH_CUSTOM=$ZSH/custom
-
-ZSH_THEME="${theme}"
 
 # Uncomment the following line to enable command auto-correction.
 ENABLE_CORRECTION="true"
