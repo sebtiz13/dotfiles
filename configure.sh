@@ -63,6 +63,8 @@ function configure::zsh() {
   export plugins
   # Substitute template variable and output in file
   envsubst '${theme} ${plugins}'< templates/zshrc > .zshrc
+  cp .zshrc ~/
+  sudo cp .zshrc /root
 }
 
 function configure::packages() {
