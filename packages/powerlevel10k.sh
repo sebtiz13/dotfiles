@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-function install::powerlevel10k() {
+function powerlevel10k::install() {
+  # Ask if want install skip if respond no
+  question "Do you want install powerlevel10k ?" y || return
+
   [ ! -n "$ZSH_CUSTOM" ] && { echo "ZSH_CUSTOM is not set"; exit 1; }
 
   local installPath=$ZSH_CUSTOM/themes/powerlevel10k
@@ -9,7 +12,7 @@ function install::powerlevel10k() {
   fi
 }
 
-function configure::powerlevel10k() {
+function powerlevel10k::configure() {
   # If .gitconfig allready exist skip
   [ -f $HOME/.p10k.zsh ] && return
 

@@ -7,10 +7,9 @@ function install::packages() {
   [ ! -z "$1" ] && packagesList=$1
 
   for package in ${packagesList[@]}; do
-    if question "Do you want install $package ?" y; then
-      source ./packages/$package.sh
-      install::$package
-    fi
+    source ./packages/$package.sh
+    # Check if install function exist for this package
+    [ "$(LC_ALL=C type -t $package::install)" == "function" ] && $package::install
   done
 }
 

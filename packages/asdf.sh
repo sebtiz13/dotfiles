@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-function install::asdf() {
+function asdf::install() {
+  # Ask if want install skip if respond no
+  question "Do you want install asdf ?" y || return
+
   if [ -d "/usr/share/asdf" ]; then
     sudo asdf update
   else

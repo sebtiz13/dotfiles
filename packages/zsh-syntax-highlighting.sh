@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
-function install::zsh-syntax-highlighting() {
+function zsh-syntax-highlighting::install() {
+  # Ask if want install skip if respond no
+  question "Do you want install zsh-autosuggestions ?" y || return
+
   [ ! -n "$ZSH_CUSTOM" ] && { echo "ZSH_CUSTOM is not set"; exit 1; }
 
   local installPath=$ZSH_CUSTOM/plugins/zsh-syntax-highlighting
