@@ -47,3 +47,9 @@ Configure only certain packages
 * [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
 * [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 * [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+# Themes
+
+* [Nordic](https://github.com/EliverLara/Nordic) (GTK themes)
+* [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
+* [Kvantum](https://github.com/tsujan/Kvantum/tree/master/Kvantum) (Needed for "Nordic" themes with KDE)

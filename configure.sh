@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ./_question.sh
+source ./functions/question.sh
 source ./_env.sh
 
 function main() {
