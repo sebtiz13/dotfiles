@@ -15,3 +15,8 @@ function github::lastVersion() {
 function github::lastDownload() {
   _latestdata $1 "tarball_url"
 }
+
+function github::repoTarball() {
+  [ -z "$1" ] && { echo "empty parameter"; return; }
+  echo "https://api.github.com/repos/$1/tarball"
+}

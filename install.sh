@@ -20,27 +20,46 @@ function install::themes() {
       curl -sSL --create-dirs $(github::lastDownload EliverLara/Nordic) -o ./tmp/Nordic.tar.gz
       local dirname=./tmp/$(tar -tzf tmp/Nordic.tar.gz | head -1 | cut -f1 -d"/")/kde
       tar -xzf ./tmp/Nordic.tar.gz --directory ./tmp
-      sudo kpackagetool5 -g -i $dirname/look-and-feel
-      sudo kpackagetool5 -g -i $dirname/aurorae/Nordic
-      lookandfeeltool -a Nordic
 
       # Install dependencies
       installer papirus-icon-theme kvantum-qt5
 
-      # Set icon theme
-      kwriteconfig5 --file $HOME/.config/kdeglobals --group Icons --key Theme Papirus-Dark
-      # Legacy configuration
-      kwriteconfig5 --file $HOME/.kde4/share/config/kdeglobals --group Icons --key Theme Papirus-Dark
+      # Patch to fallback
+      echo -e "X-KDE-fallbackPackage=org.kde.breeze.desktop\n" >> $dirname/look-and-feel/metadata.desktop
+      # Path defaults value for look and feel
+      sed -i 's/kvantum/kvantum-dark/' $dirname/look-and-feel/contents/defaults
+      sed -i 's/ColorScheme=Nordic/ColorScheme=Nordic-Darker/' $dirname/look-and-feel/contents/defaults
+      sed -i 's/candy-icons/Papirus-Dark/' $dirname/look-and-feel/contents/defaults
 
-      sudo cp -r $dirname/sddm /usr/share/sddm/themes/nordic
-      sudo kwriteconfig5 --file /etc/sddm.conf --group Theme --key Current nordic
+      sudo mkdir -p /usr/share/aurorae/themes
+      sudo cp -r $dirname/aurorae/Nordic /usr/share/aurorae/themes
+
+      sudo mkdir -p /usr/share/color-schemes
+      sudo cp -r $dirname/colorschemes/* /usr/share/color-schemes
+
+      sudo mkdir -p /usr/share/plasma/look-and-feel/Nordic
+      sudo cp -r $dirname/look-and-feel/* /usr/share/plasma/look-and-feel/Nordic
+
+      # Install KDE theme
+      curl -sSL --create-dirs $(github::repoTarball EliverLara/Nordic-kde) -o ./tmp/Nordic-kde.tar.gz
+      local dirnameTheme=./tmp/$(tar -tzf tmp/Nordic-kde.tar.gz | head -1 | cut -f1 -d"/")
+
+      sudo mkdir -p /usr/share/plasma/desktoptheme/Nordic
+      sudo cp -r $dirnameTheme/* /usr/share/plasma/desktoptheme/Nordic
 
       # kvantum configuration
-      cp -r $dirname/kvantum/* $HOME/.config/Kvantum/
+      sudo mkdir -p /usr/share/Kvantum
+      sudo cp -r $dirname/kvantum/* /usr/share/Kvantum
       kvantummanager --set Nordic-Darker
 
+      # Apply Nordic theme
+      lookandfeeltool -a Nordic
+
+      sudo sudo cp -r $dirname/sddm /usr/share/sddm/themes/nordic
+      sudo kwriteconfig5 --file /etc/sddm.conf --group Theme --key Current nordic
+
       # Konsole themes
-      cp -r $dirname/konsole/* $HOME/.local/share/konsole/
+      sudo cp -r $dirname/konsole /usr/share
       # Copy Nordic profile
       cp templates/konsole-Nordic.profile $HOME/.local/share/konsole/Nordic.profile
 
