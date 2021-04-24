@@ -24,7 +24,10 @@ function install::themes() {
       sudo kpackagetool5 -g -i $dirname/aurorae/Nordic
       lookandfeeltool -a Nordic
 
-      sudo pacman -S papirus-icon-theme
+      # Install dependencies
+      installer papirus-icon-theme kvantum-qt5
+
+      # Set icon theme
       kwriteconfig5 --file $HOME/.config/kdeglobals --group Icons --key Theme Papirus-Dark
       # Legacy configuration
       kwriteconfig5 --file $HOME/.kde4/share/config/kdeglobals --group Icons --key Theme Papirus-Dark
@@ -32,8 +35,7 @@ function install::themes() {
       sudo cp -r $dirname/sddm /usr/share/sddm/themes/nordic
       sudo kwriteconfig5 --file /etc/sddm.conf --group Theme --key Current nordic
 
-      # kvantum dependencies
-      sudo pacman -S kvantum-qt5
+      # kvantum configuration
       cp -r $dirname/kvantum/* $HOME/.config/Kvantum/
       kvantummanager --set Nordic-Darker
 

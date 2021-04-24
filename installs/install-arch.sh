@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+function installer() {
+  sudo pamac install --no-confirm $@
+}
 
 function install::dependencies() {
-    sudo pacman -S curl zsh oh-my-zsh zsh-theme-powerlevel10k nerd-fonts-noto-sans-mono git unzip fzf tree
-    sudo pamac install git-delta-bin
+    installer curl zsh oh-my-zsh zsh-theme-powerlevel10k nerd-fonts-noto-sans-mono git unzip fzf tree git-delta-bin
 }
 
 function install::shell() {
