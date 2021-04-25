@@ -23,3 +23,19 @@
   zsh-syntax-highlighting
   zsh-autosuggestions
 )
+
+# Load environment dependant installs functions
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  if [ -f "/etc/arch-release" ]; then
+    source ./installs/install-arch.sh
+  elif [ -f "/etc/debian_version" ]; then
+    echo "do implement"
+    exit 0
+  fi
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  echo "do implement"
+  exit 0
+else
+  echo "The os $OSTYPE is not supported"
+  exit 1
+fi

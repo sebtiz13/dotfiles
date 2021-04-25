@@ -77,26 +77,7 @@ function install::themes() {
 }
 
 function main() {
-  local environment
   local sharedDir=/usr/share/personal-env
-
-  if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if [ -f "/etc/arch-release" ]; then
-      environment="arch"
-      source ./installs/install-arch.sh
-    elif [ -f "/etc/debian_version" ]; then
-      environment="debian"
-      echo "do implement"
-      exit 0
-    fi
-  elif [[ "$OSTYPE" == "darwin"* ]]; then
-    environment="darwin"
-    echo "do implement"
-    exit 0
-  else
-    echo "The os $OSTYPE is not supported"
-    exit 1
-  fi
 
   # Ask for the administrator password upfront
   sudo -v
