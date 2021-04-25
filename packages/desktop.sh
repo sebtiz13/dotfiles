@@ -58,8 +58,15 @@ function _installNordic() {
   kwriteconfig5 --file $HOME/.config/konsolerc --group Desktop\ Entry --key DefaultProfile "Nordic.profile"
 }
 
+function _installGlobalMenu {
+  # Install libs to allow to use the global menu widget
+  installer libdbusmenu-glib
+  cp templates/xprofile $HOME/.xprofile
+}
+
 function desktop::install() {
   if [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
     question "Do you want install nordic themes ?" n && _installNordic
+    question "Do you want allow global menu ?" n && _installGlobalMenu
   fi
 }

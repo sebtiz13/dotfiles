@@ -1,0 +1,2 @@
+export SAL_USE_VCLPLUGIN=gtk3
+export GTK_MODULES=appmenu-gtk-module
