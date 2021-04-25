@@ -10,6 +10,7 @@
 [ -z "$DEFAULT_THEME" ] && DEFAULT_THEME="powerlevel10k/powerlevel10k"
 
 [ -z "$DEFAULT_PLUGINS" ] && DEFAULT_PLUGINS=(
+  sudo
   ssh-agent
   git
   forgit
