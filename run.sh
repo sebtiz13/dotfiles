@@ -10,6 +10,7 @@ function usage() {
     echo -e " c | configure\t\tOnly run configure"
     echo ""
     echo -e " -p | --packages \"asdf forgit\"\tInstall/configure only certains packages"
+    echo -e " -g | --gist user/gistID\t\tUse an gist to batch install packages available in repositories of your distribution"
     echo ""
 }
 
@@ -28,6 +29,15 @@ while (( "$#" )); do
     -p|--packages)
       if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
         PACKAGES=$2
+        shift 2
+      else
+        echo "Error: Argument for $1 is missing" >&2
+        exit 1
+      fi
+      ;;
+    -g|--gist)
+      if [ -n "$2" ] && [ "${2:0:1}" != "-" ]; then
+        GIST=$2
         shift 2
       else
         echo "Error: Argument for $1 is missing" >&2

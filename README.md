@@ -26,6 +26,8 @@ Only run configure
 `-p | --packages "asdf forgit"`\
 Install/configure only certains packages
 
+`-g | --gist user/gistID`\
+Use an gist to batch install packages available in repositories of your distribution
 ## Install + configure
 
 Full install

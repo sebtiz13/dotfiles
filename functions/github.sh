@@ -20,3 +20,10 @@ function github::repoTarball() {
   [ -z "$1" ] && { echo "empty parameter"; return; }
   echo "https://api.github.com/repos/$1/tarball"
 }
+
+function github::gist() {
+  [ -z "$1" ] && { echo "empty parameter"; return; }
+  local code=$(echo "$1" | sed "s/https:\/\/gist.github.com\///")
+
+  echo https://gist.githubusercontent.com/$code/raw
+}

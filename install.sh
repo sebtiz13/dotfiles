@@ -33,6 +33,12 @@ function main() {
     sudo mkdir -p $sharedDir
     sudo cp shared/* $sharedDir
   fi
+
+  if [ ! -z "$GIST" ]; then
+    curl -sSL --create-dirs "$(github::gist $GIST)" -o ./tmp/app.list
+    export -f installer
+    xargs -d '\n' -a ./tmp/app.list -I {} bash -c "installer {}"
+  fi
 }
 
 main "$@"
