@@ -20,9 +20,12 @@ function main() {
   # Ask for the administrator password upfront
   sudo -v
 
-  install::dependencies
-  install::shell
-  install::packages
+  if [ -z "$1" ]; then
+    install::dependencies
+    install::shell
+  fi
+
+  install::packages "$1"
 
   # Create directory for shared dotfiles if not exist
   if [ ! -d "$sharedDir" ]; then
@@ -31,10 +34,5 @@ function main() {
   fi
 }
 
-if [ -z "$1" ]; then
-  main
-  ./configure.sh
-else
-  install::packages "$1"
-  ./configure.sh "$1"
-fi
+main "$@"
+./configure.sh "$@"
