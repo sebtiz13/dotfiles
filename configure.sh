@@ -16,8 +16,4 @@ function main() {
   done
 }
 
-if [ -z "$1" ]; then
-  main
-else
-  configure::packages "$1"
-fi
+main "$@"
