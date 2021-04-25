@@ -5,7 +5,8 @@
 
 [ -z "$SHARE_DIR" ] && SHARE_DIR=/usr/share/personal-env
 
-[ -z "$PACKAGES" ] && PACKAGES=$(ls packages | sed -e 's/\.sh$//')
+DEFAULT_PACKAGES=$(ls packages/*.sh | sed -e 's/packages\///' -e 's/\.sh$//')
+[ -z "$PACKAGES" ] && PACKAGES=$DEFAULT_PACKAGES
 
 [ -z "$DEFAULT_THEME" ] && DEFAULT_THEME="powerlevel10k/powerlevel10k"
 

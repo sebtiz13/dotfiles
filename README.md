@@ -10,6 +10,22 @@ Setup tested on:
 
 # Usage
 
+command format  `./run.sh install|configure [OPTIONS]`
+example usage `./run.sh install -p "asdf forgit"` to only install and configure asdf and forgit packages
+
+**Mode:**
+
+`i|install`\
+Run install & configure
+
+`c|configure`\
+Only run configure
+
+**options**
+
+`-p | --packages "asdf forgit"`\
+Install/configure only certains packages
+
 ## Install + configure
 
 Full install

@@ -20,7 +20,8 @@ function main() {
   # Ask for the administrator password upfront
   sudo -v
 
-  if [ -z "$1" ]; then
+  # Not run base install when PACKAGES is customized
+  if [ "$PACKAGES" == "$DEFAULT_PACKAGES" ]; then
     install::dependencies
     install::shell
   fi
@@ -35,4 +36,4 @@ function main() {
 }
 
 main "$@"
-./configure.sh "$@"
+source ./configure.sh
