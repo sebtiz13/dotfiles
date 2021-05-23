@@ -27,6 +27,7 @@ function _installNordic() {
   # Install KDE theme
   curl -sSL --create-dirs $(github::repoTarball EliverLara/Nordic-kde) -o ./tmp/Nordic-kde.tar.gz
   local dirnameTheme=./tmp/$(tar -tzf tmp/Nordic-kde.tar.gz | head -1 | cut -f1 -d"/")
+  tar -xzf tmp/Nordic-kde.tar.gz --directory ./tmp
 
   sudo mkdir -p /usr/share/plasma/desktoptheme/Nordic
   sudo cp -r $dirnameTheme/* /usr/share/plasma/desktoptheme/Nordic
