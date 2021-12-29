@@ -32,6 +32,8 @@ function asdf::install() {
 }
 
 function asdf::update() {
+  # skip if is installed by package
+  checkPackage asdf-vm && return
   # Skip if is not installed
   [ -d $installDir ] || return
 

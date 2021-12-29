@@ -97,6 +97,8 @@ function desktop::install() {
 
 function desktop::update() {
   if [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
+    # skip if is installed by package
+    checkPackage nordic-theme nordic-kde-git kvantum-theme-nordic-git sddm-nordic-theme-git && return
     question "Do you want update nordic themes ?" n || return
 
     desktop::_downloadTheme

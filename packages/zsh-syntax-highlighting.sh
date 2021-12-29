@@ -13,6 +13,8 @@ function zsh-syntax-highlighting::install() {
 }
 
 function zsh-syntax-highlighting::update() {
+  # skip if is installed by package
+  checkPackage zsh-syntax-highlighting && return
   # Skip if is not installed
   [ -d $installDir ] || return
   # Ask if want update skip if respond no

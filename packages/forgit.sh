@@ -17,6 +17,8 @@ function forgit::install() {
 }
 
 function forgit::update() {
+  # skip if is installed by package
+  checkPackage forgit-git && return
   # Skip if is not installed
   [ -d $installDir ] || return
   # Ask if want update skip if respond no

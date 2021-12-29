@@ -13,6 +13,8 @@ function zsh-autosuggestions::install() {
 }
 
 function zsh-autosuggestions::update() {
+  # skip if is installed by package
+  checkPackage zsh-autosuggestions && return
   # Skip if is not installed
   [ -d $installDir ] || return
   # Ask if want update skip if respond no

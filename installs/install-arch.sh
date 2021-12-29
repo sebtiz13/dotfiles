@@ -3,6 +3,10 @@ function installer() {
   sudo pamac install --no-confirm $@
 }
 
+function checkPackage() {
+  pacman -Qi $1 &> /dev/null
+}
+
 function install::dependencies() {
     # Enable Aur package
     sudo sed -i 's/#EnableAUR/EnableAUR/' /etc/pamac.conf
