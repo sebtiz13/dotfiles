@@ -18,7 +18,11 @@ function github::lastDownload() {
 
 function github::repoTarball() {
   [ -z "$1" ] && { echo "empty parameter"; return; }
-  echo "https://api.github.com/repos/$1/tarball"
+  local url="https://api.github.com/repos/$1/tarball"
+
+  [ ! -z "$2" ] && url=$url/$2
+
+  echo $url;
 }
 
 function github::gist() {
