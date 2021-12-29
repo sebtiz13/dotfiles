@@ -8,6 +8,7 @@ function usage() {
     echo ""
     echo -e " i | install\t\tRun install & configure"
     echo -e " c | configure\t\tOnly run configure"
+    echo -e " u | update\t\tUpdate packages"
     echo ""
     echo -e " -p | --packages \"asdf forgit\"\tInstall/configure only certains packages"
     echo -e " -g | --gist user/gistID\t\tUse an gist to batch install packages available in repositories of your distribution"
@@ -21,9 +22,10 @@ while (( "$#" )); do
       usage
       exit
       ;;
-    i|install|c|configure)
+    i|install|c|configure|u|update)
       [ "$1" = "i" ] || [ "$1" = "install" ] && INSTALL=0
       [ "$1" = "c" ] || [ "$1" = "configure" ] && CONFIGURE=0
+      [ "$1" = "u" ] || [ "$1" = "update" ] && UPDATE=0
       shift
       ;;
     -p|--packages)
@@ -55,6 +57,8 @@ if [ ! -z "$INSTALL" ]; then
   source ./install.sh
 elif [ ! -z "$CONFIGURE" ]; then
   source ./configure.sh
+elif [ ! -z "$UPDATE" ]; then
+  source ./update.sh
 else
   echo "What you want to do ?"
   echo ""

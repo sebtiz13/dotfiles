@@ -15,11 +15,14 @@ example usage `./run.sh install -p "asdf forgit"` to only install and configure 
 
 **Mode:**
 
-`i|install`\
+`i | install`\
 Run install & configure
 
-`c|configure`\
+`c | configure`\
 Only run configure
+
+`u | update`\
+Update packages
 
 **options**
 
