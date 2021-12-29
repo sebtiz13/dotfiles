@@ -1,5 +1,5 @@
 # Alias for zsh_reload
-alias reload="src"
+alias reload='omz reload'
 
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
