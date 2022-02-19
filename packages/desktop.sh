@@ -88,11 +88,24 @@ function desktop::_installGlobalMenu {
   cp templates/xprofile $HOME/.xprofile
 }
 
+function desktop::_installEmoji {
+  # Install base font emoji if not already installed and add configuration to enable
+  installer noto-fonts-emoji
+  sudo cp templates/emoji.conf /etc/fonts/conf.avail/99-emoji.conf
+  sudo ln -s /etc/fonts/conf.avail/99-emoji.conf /etc/fonts/conf.d/99-emoji.conf
+
+  if question "Do you want install twemoji (free twitter emoji) ?" n; then
+    installer ttf-twemoji
+    sudo ln -s /usr/share/fontconfig/conf.avail/75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
+  fi
+}
+
 function desktop::install() {
   if [ "$XDG_CURRENT_DESKTOP" == "KDE" ]; then
     question "Do you want install nordic themes ?" n && desktop::_install
     question "Do you want allow global menu ?" n && desktop::_installGlobalMenu
   fi
+  question "Do you can see this emoji 😛 ?" n && desktop::_installEmoji
 }
 
 function desktop::update() {
