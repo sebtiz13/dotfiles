@@ -25,7 +25,7 @@ else
   ZSH_THEME="${theme}"
 fi
 
-ASDF_DIR=/usr/share/asdf
+ASDF_DIR=/opt/asdf-vm
 ASDF_DATA_DIR=$HOME/.asdf
 
 export ZSH=/usr/share/oh-my-zsh
