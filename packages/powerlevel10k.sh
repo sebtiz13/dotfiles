@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-installDir=$ZSH_CUSTOM/plugins/zsh-autosuggestions
+installDir=$ZSH_CUSTOM/themes/powerlevel10k
 function powerlevel10k::_download() {
   sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $installDir
 }

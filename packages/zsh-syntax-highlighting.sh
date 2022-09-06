@@ -2,7 +2,7 @@
 
 installDir=$ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 function zsh-syntax-highlighting::_download() {
-  sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $installPath
+  sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $installDir
 }
 
 function zsh-syntax-highlighting::install() {
