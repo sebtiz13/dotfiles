@@ -8,6 +8,8 @@ function checkPackage() {
 }
 
 function install::dependencies() {
+    # Alias ssh-askpass
+    [ -f /usr/bin/ksshaskpass ] && [ ! -f /usr/lib/ssh/ssh-askpass ] && sudo ln -s /usr/bin/ksshaskpass /usr/lib/ssh/ssh-askpass
     # Enable Aur package
     sudo sed -i 's/#EnableAUR/EnableAUR/' /etc/pamac.conf
     installer curl zsh oh-my-zsh zsh-theme-powerlevel10k nerd-fonts-noto-sans-mono git unzip fzf tree git-delta
