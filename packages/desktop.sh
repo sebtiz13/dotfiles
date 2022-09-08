@@ -97,6 +97,9 @@ function desktop::_installEmoji {
   if question "Do you want install twemoji (free twitter emoji) ?" n; then
     installer ttf-twemoji
     sudo ln -s /usr/share/fontconfig/conf.avail/75-twemoji.conf /etc/fonts/conf.d/75-twemoji.conf
+    # Add fontconfing to fix render problen on certain website (alias "segoe UI" with "Liberation Sans")
+    sudo cp templates/30-segoe-ui.conf /usr/share/fontconfig/conf.avail/30-segoe-ui.conf
+    sudo ln -s /usr/share/fontconfig/conf.avail/30-segoe-ui.conf /etc/fonts/conf.d/30-segoe-ui.conf
   fi
 }
 
