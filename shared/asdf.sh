@@ -57,7 +57,7 @@ function vmc() {
 
   if [[ $lang ]]; then
     echo "Please select versions to remove (use TAB to select multiple)"
-    local versions=$(asdf list $lang | fzf -multi)
+    local versions=$(asdf list $lang | fzf --multi)
     if [[ $versions ]]; then
       for version in $(echo $versions);
       do; asdf uninstall $lang $version; done;
