@@ -11,7 +11,7 @@ function vmi() {
   if [[ ! $lang ]]; then
     echo "What plugin you want install ?"
     # use cut to get only the name
-    lang=$(asdf plugin list all | fzf | cut -d' ' -f1)
+    lang=$(asdf plugin list all | cut -d' ' -f1 | fzf)
   fi
 
   if [[ $lang ]]; then
@@ -38,7 +38,7 @@ function vmi() {
         echo "Please select the active version"
         version=$(echo $versions | tr " " "\n" | fzf)
       fi
-      asdf global $lang $version
+      asdf set $lang $version --home
     fi
   fi
 }
@@ -52,15 +52,18 @@ function vmc() {
 
   if [[ ! $lang ]]; then
     echo "What plugin you want manage ?"
-    lang=$(asdf plugin-list | fzf)
+    lang=$(asdf plugin list | fzf)
   fi
 
   if [[ $lang ]]; then
     echo "Please select versions to remove (use TAB to select multiple)"
-    local versions=$(asdf list $lang | fzf --multi)
+    # Need to remove "*", that indicate current version
+    local versions=$(asdf list $lang | sed -e 's/\*//g' -e 's/ //g' | fzf --multi)
     if [[ $versions ]]; then
       for version in $(echo $versions);
-      do; asdf uninstall $lang $version; done;
+        do;
+        asdf uninstall $lang $version;
+      done;
     fi
   fi
 }
