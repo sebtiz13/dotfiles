@@ -1,0 +1,29 @@
+packages:
+  manjaro:
+    # Terminal
+    - "zsh"
+    - "sheldon"
+    - "fzf"
+    - "eza"
+    - "bat"
+    - "fd"
+    - "git-delta"
+    - "jaq"
+    - "tlrc-bin"
+    - "lesspipe"
+    - "perl-image-exiftool"
+    # Tools
+    - "mise"
+    - "grammalecte"
+    # Applications
+    - "brave-browser"
+    # Code
+    - "code"
+    - "code-features"
+    - "code-marketplace"
+    # Font for code
+    - "ttf-firacode-nerd"
+    # Font for terminal
+    - "ttf-meslo-nerd-font-powerlevel10k"
+    - "ttf-noto-nerd"
+    - "ttf-roboto-mono-nerd"

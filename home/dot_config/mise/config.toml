@@ -1,0 +1,22 @@
+[settings]
+idiomatic_version_file_enable_tools = ["python", "node"]
+
+# Trust mise config in Developpement directory
+trusted_config_paths = [
+    '~/Development/*',
+]
+
+env_file = '.env'
+experimental = true
+
+[tools]
+chezmoi = "2.70.0"
+flux2 = "latest"
+"github:alltuner/mise-completions-sync" = "latest"
+helm = "latest"
+kubectl = "latest"
+shellcheck = "latest"
+uv = "latest"
+
+[hooks]
+postinstall = "mise-completions-sync --shell zsh"

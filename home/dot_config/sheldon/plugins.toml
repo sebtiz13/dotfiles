@@ -1,0 +1,108 @@
+# `sheldon` configuration file
+# ----------------------------
+#
+# You can modify this file directly or you can use one of the following
+# `sheldon` commands which are provided to assist in editing the config file:
+#
+# - `sheldon add` to add a new plugin to the config file
+# - `sheldon edit` to open up the config file in the default editor
+# - `sheldon remove` to remove a plugin from the config file
+#
+# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+
+#
+# Inspired by https://github.com/rossmacarthur/dotfiles/blob/trunk/src/sheldon/plugins.toml
+#
+# Load order of zsh-users plugins:
+# https://www.reddit.com/r/zsh/comments/1etl9mz/comment/lie04dt/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+# https://github.com/romkatv/zsh-bench?tab=readme-ov-file#deferred-initialization
+
+shell = "zsh"
+
+[templates]
+# Source plugin files after the first prompt is displayed, speeding up shell startup.
+defer = """{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source "{{ file }}"\n{% endfor %}{{ hooks?.post | nl }}"""
+# Same as defer, but waits an extra 0.5s — for low-priority plugins that must load after deferred ones.
+defer-more = """{{ hooks?.pre | nl }}{% for file in files %}zsh-defer -t 0.5 source "{{ file }}"\n{% endfor %}{{ hooks?.post | nl }}"""
+# Add the plugin directory to fpath (for completions and autoloaded functions), without sourcing it.
+fpath = 'fpath=("{{ dir }}" $fpath)'
+# Add the plugin directory to PATH (for plugins that provide executables).
+path = 'path=("{{ dir }}" $path)'
+
+# Paths
+# -----
+[plugins.git-open]
+github = "paulirish/git-open"
+apply = ["path"]
+
+# Useless
+# [plugins.zsh-bench]
+# github = "romkatv/zsh-bench"
+# apply = ["path"]
+
+# Completions
+# -----------
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+[plugins.ollama_zsh_completion]
+github = "ocodo/ollama_zsh_completion"
+apply = ["fpath"]
+
+[plugins.fzf]
+github = "junegunn/fzf"
+dir = "shell"
+use = ["{completion,key-bindings}.zsh"]
+
+# Sourced
+# -------
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[plugins.zsh-autoswitch-virtualenv]
+github = "MichaelAquilina/zsh-autoswitch-virtualenv"
+use = ["autoswitch_virtualenv.plugin.zsh"]
+
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
+hooks.post = "source $XDG_CONFIG_HOME/zsh/p10k.zsh"
+
+[plugins.fzf-tab-source]
+github = "Freed-Wu/fzf-tab-source"
+
+[plugins.compinit]
+inline = "autoload -Uz compinit && zsh-defer compinit"
+
+# Deferred plugins
+# ----------------
+
+# fzf-tab needs to be loaded after compinit, but before plugins which will wrap widgets,
+# such as zsh-autosuggestions or fast-syntax-highlighting
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["defer"]
+hooks.post = "source $XDG_CONFIG_HOME/zsh/fzf-tab.zsh"
+
+[plugins.fast-syntax-highlighting]
+github = "zdharma-continuum/fast-syntax-highlighting"
+apply = ["defer"]
+
+[plugins.ssh-agent]
+local = "~/.config/zsh"
+apply = ["defer"]
+
+[plugins.zsh-ssh]
+github = 'sunlei/zsh-ssh'
+apply = ["defer"]
+
+# Plugins that are even more deferred
+# -----------------------------------
+
+# This should be loaded AFTER zsh-syntax-highlighting.
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+apply = ["defer-more"]
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+apply = ["defer-more"]

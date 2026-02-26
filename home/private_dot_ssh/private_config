@@ -1,0 +1,4 @@
+# Add keys loaded with `IdentityFile` to ssh-agent
+AddKeysToAgent yes
+
+Include config.d/*.conf

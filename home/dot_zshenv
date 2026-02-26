@@ -1,0 +1,7 @@
+#----------------------
+# .zshenv - Zsh environment file, loaded always.
+#----------------------
+# Redirect ZSH file in `.config/zsh`
+export ZDOTDIR="$HOME/.config/zsh"
+
+[[ -f "$ZDOTDIR/.zshenv" ]] && source "$ZDOTDIR/.zshenv"

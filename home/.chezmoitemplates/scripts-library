@@ -1,0 +1,46 @@
+# shellcheck shell=bash
+
+set -euo pipefail
+
+log_color() {
+  local color_code="$1"
+  shift
+
+  printf "\033[${color_code}m%s\033[0m\n" "$*" >&2
+}
+
+log_red() {
+  log_color "0;31" "$@"
+}
+
+log_blue() {
+  log_color "0;34" "$@"
+}
+
+log_green() {
+  log_color "1;32" "$@"
+}
+
+log_yellow() {
+  log_color "1;33" "$@"
+}
+
+error() {
+  log_red " ❌ - $@"
+}
+
+warning() {
+  log_yellow " ⚠️ - $@"
+}
+
+info() {
+  log_blue " ℹ️ - $@"
+}
+
+success() {
+  log_green " ✅ - $@"
+}
+
+log() {
+  log_blue "$@"
+}
