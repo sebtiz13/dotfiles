@@ -46,6 +46,7 @@ This setup includes:
 - **Powerlevel10k**: A customizable prompt for ZSH
 - **FZF**: A fuzzy finder for command-line
 - **Mise**: A polyglot runtime manager
+- **Bitwarden**: Secure secrets (eg. SSH keys, GPG keys) management
 - **lessfilter**: A custom filter for `less` to enhance file preview using `eza`, `bat`, and `exiftool`. This is particularly useful for `fzf-tab` preview
 
 ### Sheldon Plugins
@@ -82,11 +83,16 @@ The `mise-completions-sync` tool is used to synchronize shell completion for the
 
 ### Package Installation
 
-Packages defined in `home/.chezmoidata/packages.yaml` are automatically installed using the script `home/.chezmoiscripts/run_once_before_install-packages.sh.tmpl`. This script enables AUR on pamac, updates sources, and installs the specified packages.
+Packages defined in `home/.chezmoidata/packages.yaml` are automatically installed using the script `home/.chezmoiscripts/run_once_before_01-install-packages.sh.tmpl`. This script enables AUR on pamac, updates sources, and installs the specified packages.
 
 ### VSCode Configuration
 
-On macOS and Linux systems, VSCode extensions defined in `home/.chezmoidata/vscode.yaml` are automatically installed using the script `home/.chezmoiscripts/run_onchange_after_configure-vscode.sh.tmpl`. This script installs the specified extensions using the VSCode CLI.
+On macOS and Linux systems, VSCode extensions defined in `home/.chezmoidata/vscode.yaml` are automatically installed using the script `home/.chezmoiscripts/run_onchange_after_03-configure-vscode.sh.tmpl`. This script installs the specified extensions using the VSCode CLI.
+
+### Bitwarden Integration
+
+This setup uses Bitwarden to securely store and manage secrets like SSH keys, GPG keys, and other sensitive information.
+During setup, chezmoi will prompt for Bitwarden server information and unlock credentials to securely retrieve these secrets.
 
 ## Dotfiles Structure
 
@@ -108,8 +114,9 @@ On macOS and Linux systems, VSCode extensions defined in `home/.chezmoidata/vsco
     - `p10k.zsh`: Powerlevel10k configurations
     - `ssh-agent.zsh`: ssh-agent helper (loaded by sheldon with zsh-defer)
 - `.ssh/`: SSH configuration
-  - `config.d`: Directory for SSH configuration environments in `*.conf` files (Private)
+  - `config.d`: Directory for SSH configuration environments in `*.conf` files
   - `config`: SSH client configuration
+  - SSH keys are managed via Bitwarden CLI
 - `.chezmoi.yaml.tmpl`: Chezmoi configuration template
 - `.lessfilter`: Custom filter for `less` to enhance file preview using `eza`, `bat`, and `exiftool`
 - `.zshenv`: Define ZDOTDIR and source `.config/zsh/.zshenv`

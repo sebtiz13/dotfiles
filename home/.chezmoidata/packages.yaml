@@ -13,6 +13,8 @@ packages:
     - "lesspipe"
     - "perl-image-exiftool"
     # Tools
+    - "bitwarden-cli-bin"
+    - "gnupg"
     - "mise"
     - "grammalecte"
     # Applications

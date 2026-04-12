@@ -1,8 +1,12 @@
 {{- $git_email := promptStringOnce . "git.email" "What is your git email address" -}}
 {{- $git_name := promptStringOnce . "git.name" "What is your git name" -}}
 {{- $git_signingkey := promptStringOnce . "git.signingkey" "What is your git signingkey" -}}
+{{- $bw_server := promptStringOnce . "bitwarden.server" "What is your bitwarden server" "https://bitwarden.com" -}}
+
 data:
   git:
     email: {{ $git_email | quote }}
     name: {{ $git_name | quote }}
     signingkey: {{ $git_signingkey | quote }}
+  bitwarden:
+    server: {{ $bw_server | quote }}

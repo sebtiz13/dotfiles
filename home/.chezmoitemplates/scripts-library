@@ -44,3 +44,15 @@ success() {
 log() {
   log_blue "$@"
 }
+
+# Use jq or jaq if available
+_jq() {
+  if command -v jq >/dev/null 2>&1; then
+    command jq "$@"
+  elif command -v jaq >/dev/null 2>&1; then
+    command jaq "$@"
+  else
+    error "jq is not installed. Please install jq to use this script."
+    exit 1
+  fi
+}

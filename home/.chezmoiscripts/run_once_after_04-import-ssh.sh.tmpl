@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# shellcheck shell=bash
+# * Use bitwarden CLI to import SSH keys
+# ! Doesn't use template file because that cause check with `bw` cli on any `chezmoi apply`
+# ! because he can't detect if they realy changed and this command is very slow to execute.
+# ! So since the keys are not changing often, It's better to manually force this script only when needed.
+# ? Unfortunately should necessary use the official `bw` client instead the faster `rbw` (https://github.com/doy/rbw)
+# ? because he doesn't support the attachment for now.
+
+# {{ template "scripts-library" }}
+
+set -eufo pipefail
+
+info "Import SSH keys"
+
+[[ -z "${BW_SESSION:-}" ]] && export BW_SESSION="$(bw unlock --raw)"
+
+_provision_key() {
+  local key_name="$1"
+  local file_name="$2"
+  local key_path="$HOME/.ssh/$file_name"
+
+  log "Importing SSH \`$key_name\` key to $file_name"
+  ITEM="$(bw get item "$key_name")"
+  echo "$ITEM" | _jq -r .sshKey.privateKey > "$key_path"
+  echo "$ITEM" | _jq -r .sshKey.publicKey > "$key_path".pub
+  chmod 600 "$key_path"
+  chmod 600 "$key_path".pub
+  log_green "SSH \`$key_name\` key imported successfully"
+}
+
+_provision_key "personal-ssh" "id_ed25519"
+_provision_key "github-ssh" "github_ed25519"
+
+success "SSH keys imported Successfully"
