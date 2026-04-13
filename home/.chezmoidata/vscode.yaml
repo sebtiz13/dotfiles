@@ -2,9 +2,7 @@ vscode:
   extensions:
     - "adamhartford.vscode-base64"
     - "arcticicestudio.nord-visual-studio-code"
-    - "bbugh.change-color-format"
-    - "bmalehorn.shell-syntax"
-    - "chrmarti.regex"
+    - "JeronimoEkerdt.color-picker-universal"
     - "codezombiech.gitignore"
     - "editorconfig.editorconfig"
     - "edwinhuish.better-comments-next"
@@ -46,5 +44,4 @@ vscode:
     - "vivaxy.vscode-conventional-commits"
     - "vue.volar"
     - "yoavbls.pretty-ts-errors"
-    - "yokawasa.jwt-debugger"
     - "yzhang.markdown-all-in-one"
