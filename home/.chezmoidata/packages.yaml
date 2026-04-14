@@ -16,6 +16,7 @@ packages:
     - "bitwarden-cli-bin"
     - "gnupg"
     - "mise"
+    - "usage" # needed for mise completion but optionnal so not automatically installed
     - "grammalecte"
     # Applications
     - "brave-browser"
