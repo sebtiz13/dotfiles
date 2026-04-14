@@ -65,7 +65,7 @@ use = ["autoswitch_virtualenv.plugin.zsh"]
 
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
-hooks.post = "source $XDG_CONFIG_HOME/zsh/p10k.zsh"
+hooks.post = "source ${ZDOTDIR:-$HOME}/p10k.zsh"
 
 [plugins.fzf-tab-source]
 github = "Freed-Wu/fzf-tab-source"
@@ -81,7 +81,7 @@ inline = "autoload -Uz compinit && zsh-defer compinit"
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 apply = ["defer"]
-hooks.post = "source $XDG_CONFIG_HOME/zsh/fzf-tab.zsh"
+hooks.post = "source ${ZDOTDIR:-$HOME}/fzf-tab.zsh"
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"

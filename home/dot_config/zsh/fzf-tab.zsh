@@ -1,6 +1,6 @@
 # Define custom sources for fzf-tab scripts
 # Look customize: https://github.com/Freed-Wu/fzf-tab-source?tab=readme-ov-file#customize
-zstyle ':fzf-tab:sources' config-directory $XDG_CONFIG_HOME/zsh/sources
+zstyle ':fzf-tab:sources' config-directory ${ZDOTDIR:-$HOME}/sources
 
 # ? FZF-tab configurations
 # Use fzf default options for fzf-tab

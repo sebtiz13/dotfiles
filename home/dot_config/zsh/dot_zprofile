@@ -4,7 +4,7 @@
 # It's best practice to setup path in .zprofile
 # source: https://mac.install.guide/terminal/zshrc-zprofile
 
-typeset -x ZSH_COMPDUMP="$HOME/.cache/zcompdump"
+typeset -x ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
 #----------------------
 # User ZSH completions
@@ -126,5 +126,9 @@ typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=#FF5C57,bold' #p10k 
 #------------------
 # Custom env
 #------------------
-export CUSTOM_ENVFILE="$HOME/.config/zsh/env.zsh"
-[[ -f $CUSTOM_ENVFILE ]] && source "$CUSTOM_ENVFILE"
+ENV_FILES=(
+  "${HOME}/.vibe/.env" # Mistral vibe key
+)
+for envfile in "${ENV_FILES[@]}"; do
+  [[ -f ${envfile} ]] && source "${envfile}"
+done

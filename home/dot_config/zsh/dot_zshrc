@@ -2,7 +2,7 @@
 # .zshrc setup
 #---------------
 # Always set these first, so history is preserved, no matter what happens.
-HISTFILE=$HOME/.local/state/zhistory
+HISTFILE=${XDG_STATE_HOME:-$HOME/.local/state}/zhistory
 
 # Max number of history entries to keep in memory.
 # 1.2 * SAVEHIST is Zsh recommended value for HISTSIZE
@@ -56,7 +56,7 @@ zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' complete-options true
 zstyle ':completion:*' file-sort modification
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/.zcompcache"
+zstyle ':completion:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/.zcompcache"
 
 # Ignore certain functions
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
@@ -99,7 +99,7 @@ bindkey '^[[Z' undo                                             # Shift+tab undo
 #------------------
 # Functions
 #------------------
-source $XDG_CONFIG_HOME/zsh/functions.zsh
+source "${ZDOTDIR:-$HOME}/functions.zsh"
 
 #------------------
 # Aliases
@@ -107,4 +107,4 @@ source $XDG_CONFIG_HOME/zsh/functions.zsh
 # Define reload zsh config
 alias reload="exec zsh"
 
-source $XDG_CONFIG_HOME/zsh/aliases.zsh
+source "${ZDOTDIR:-$HOME}/aliases.zsh"
