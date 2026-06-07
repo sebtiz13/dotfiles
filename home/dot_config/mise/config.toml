@@ -19,4 +19,4 @@ shellcheck = "latest"
 uv = "latest"
 
 [hooks]
-postinstall = "mise-completions-sync --shell zsh"
+postinstall = "misecompsync --shell zsh"
