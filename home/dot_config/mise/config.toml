@@ -10,7 +10,7 @@ env_file = '.env'
 experimental = true
 
 [tools]
-chezmoi = "2.70.0"
+chezmoi = "2.70.5"
 flux2 = "latest"
 "github:alltuner/mise-completions-sync" = "latest"
 helm = "latest"
