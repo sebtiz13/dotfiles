@@ -1,0 +1,21 @@
+#!/bin/bash
+# ? Install
+# ? Inspired by https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
+# {{ template "scripts-library" }}
+
+info "Install Custom Keyboard layouts"
+# Sourced from https://github.com/carjorvaz/macos-us-altgr-intl
+sudo cp {{ .chezmoi.sourceDir }}/assets/us-altgr-intl.keylayout /Library/Keyboard\ Layouts
+
+# TODO : Add the keyboard layouts in list and select it (the followed script does't work)
+# # The keys we have to add for each layout
+# apple_keys=("AppleEnabledInputSources" "AppleInputSourceHistory" "AppleSelectedInputSources")
+# for key in "${apple_keys[@]}" ; do
+#   defaults write com.apple.HIToolbox "$key" \
+#       -array-add '{InputSourceKind="Keyboard Layout"; "KeyboardLayout ID" = "-11214"; "KeyboardLayout Name" = "us-altgr-intl";}'
+# done
+
+# defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "org.unknown.keylayout.us-altgr-intl"
+
+success "Custom keyboard layouts installed"

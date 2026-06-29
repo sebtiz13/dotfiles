@@ -83,16 +83,22 @@ The `mise-completions-sync` tool is used to synchronize shell completion for the
 
 ### Package Installation
 
-Packages defined in `home/.chezmoidata/packages.yaml` are automatically installed using the script `home/.chezmoiscripts/run_once_before_01-install-packages.sh.tmpl`. This script enables AUR on pamac, updates sources, and installs the specified packages.
+Packages defined in `home/.chezmoidata/packages.yaml` are automatically installed using the script `home/.chezmoiscripts/run_once_before_01-install-packages.sh.tmpl`.
+For Manjaro this script enables AUR on pamac, updates sources, and installs the specified packages.
+For macOS this script install brew if not present and installs packages with it.
 
 ### VSCode Configuration
 
-On macOS and Linux systems, VSCode extensions defined in `home/.chezmoidata/vscode.yaml` are automatically installed using the script `home/.chezmoiscripts/run_onchange_after_03-configure-vscode.sh.tmpl`. This script installs the specified extensions using the VSCode CLI.
+VSCode extensions defined in `home/.chezmoidata/vscode.yaml` are automatically installed using the script `home/.chezmoiscripts/run_onchange_after_03-configure-vscode.sh.tmpl`. This script installs the specified extensions using the VSCode CLI.
 
 ### Bitwarden Integration
 
 This setup uses Bitwarden to securely store and manage secrets like SSH keys, GPG keys, and other sensitive information.
 During setup, chezmoi will prompt for Bitwarden server information and unlock credentials to securely retrieve these secrets.
+
+### macOS (darwin) specific
+
+The script `home/.chezmoiscripts/darwin/run_once_before_10-keyboard-layout.sh.tmpl` copy keyboard layout on system and `home/.chezmoiscripts/darwin/run_onchange_after_90_configure-defaults.sh.tmpl` configure macOS settings.
 
 ## Dotfiles Structure
 

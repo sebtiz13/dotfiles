@@ -1,0 +1,11 @@
+assets
+
+# Ignore these files if is not darwin install (macOS)
+{{ if ne .chezmoi.os "darwin" }}
+.chezmoiscripts/darwin/**
+{{ end }}
+
+# Ignore these files if is not linux install
+{{ if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/**
+{{ end }}
