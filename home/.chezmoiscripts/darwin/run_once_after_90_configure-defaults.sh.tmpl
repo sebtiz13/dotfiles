@@ -1,0 +1,127 @@
+#!/bin/bash
+# ? Most options was documented here https://macos-defaults.com/
+# ? Inspired by https://github.com/mathiasbynens/dotfiles/blob/master/.macos
+
+# {{ template "scripts-library" }}
+
+set -eufo pipefail
+
+info "Quit System Preferences"
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+info "Configuring macOS settings"
+
+# defaults write -g CGDisableCursorLocationMagnification -int 0 # Enlarge cursor on quick moove
+
+# Set dark interface on the menu
+defaults write -g AppleInterfaceStyle -string "Dark"
+
+# Set a blazingly fast keyboard repeat rate (System Preferences → Keyboard)
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g KeyRepeat -int 2
+
+# Turn autocorrect, capitalization, period etc off globally (all apps)
+defaults write -g WebAutomaticSpellingCorrectionEnabled -int 0 #
+defaults write -g NSAutomaticSpellingCorrectionEnabled -int 0 # Spelling
+defaults write -g NSAutomaticCapitalizationEnabled -int 0 # Capitalize
+defaults write -g NSAutomaticPeriodSubstitutionEnabled -int 0 # Auto dot for two spaces
+# Dash and quote, only one switch in interface
+defaults write -g NSAutomaticDashSubstitutionEnabled -int 0
+defaults write -g NSAutomaticQuoteSubstitutionEnabled -int 0
+# Behavior when a key is held down for a long time (0 = repeat character, 1 = show character accents menu)
+defaults write -g ApplePressAndHoldEnabled -int 0
+
+defaults write -g NSAutomaticInlinePredictionEnabled -int 0 # Show prediction
+defaults write -g NSAutomaticTextCorrectionEnabled -int 0 # ?
+defaults write -g NSSpellCheckerAutomaticallyIdentifiesLanguages -int 1 #
+
+defaults write -g NSAutomaticWindowAnimationsEnabled -int 0 #
+defaults write -g NSMenuEnableActionImages -int 0 #
+defaults write -g NSUserDictionaryReplacementItems '()' # Dictionary
+
+defaults write -g com.apple.keyboard.fnState -int 1 # Switch behavior functions keys, 0 = special (volumes, ...), 1 = classic (f1)
+defaults write -g com.apple.swipescrolldirection -int 0
+defaults write -g com.apple.trackpad.forceClick -int 1 # Force click to preview, search ...
+
+# Menu bar
+defaults write com.apple.menuextra.clock ShowDate -int 1
+defaults write com.apple.menuextra.clock ShowDayOfWeek -int 1
+defaults write com.apple.menuextra.clock ShowSeconds -int 1
+
+# Dock
+defaults write com.apple.dock autohide -int 0
+defaults write com.apple.dock orientation -string bottom
+defaults write com.apple.dock tilesize -int 48
+defaults write com.apple.dock magnification -int 1
+defaults write com.apple.dock largesize -int 72
+defaults write com.apple.dock show-recents -int 0
+
+# Hot corners
+# Possible values:
+#  0: no-op
+#  1: None
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+# 13: Lock Screen
+# 14: Quick note
+# Modifiers:
+#  131072: Shift
+# 1048576: Command
+# 262144: Control
+# 524288: Option
+
+# Bottom left screen corner → Start screen saver
+defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# Bottom Right screen corner + Command → Quick note
+defaults write com.apple.dock wvous-br-corner -int 14
+defaults write com.apple.dock wvous-br-modifier -int 1048576
+# Top Left screen corner → Mission Control
+defaults write com.apple.dock wvous-tl-corner -int 2
+defaults write com.apple.dock wvous-tl-modifier -int 0
+
+# Finder
+defaults write -g AppleShowAllExtensions -int 1 # Show all files extensions
+defaults write -g AppleMiniaturizeOnDoubleClick -int 0
+
+# home directory is opened in the fileviewer dialog when saving a new document instead Icloud
+defaults write -g NSDocumentSaveNewDocumentsToCloud -int 0
+
+defaults write com.apple.finder CreateDesktop -int 0 # Hide icon on desktop
+defaults write com.apple.finder FXDefaultSearchScope -string SCcf # Search in the current folder
+defaults write com.apple.finder FXPreferredViewStyle -string icnv # Use icon view
+defaults write com.apple.finder _FXSortFoldersFirst -int 1 # Show folder first
+defaults write com.apple.finder FXEnableExtensionChangeWarning -int 1 # Prevent when change extension
+defaults write com.apple.finder ShowPathbar -int 1 # Show path bar in the bottom of the Finder
+defaults write com.apple.finder ShowStatusBar -int 1 # Show status bar in the bottom of the Finder
+defaults write com.apple.finder NewWindowTarget -string PfHm # Open new finder on user directory
+
+# Avoid creating .DS_Store files on network or USB volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+##
+# Kill affected applications
+##
+for app in "Dock" "Finder" \
+    "Safari" "SystemUIServer"; do
+    killall "$app" || true
+done
+
+success "macOS configured successfully"

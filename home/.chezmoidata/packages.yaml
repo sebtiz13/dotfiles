@@ -32,3 +32,37 @@ packages:
     - "ttf-meslo-nerd-font-powerlevel10k"
     - "ttf-noto-nerd"
     - "ttf-roboto-mono-nerd"
+  darwin:
+    brews:
+      # CLI base commands
+      - "tree"
+      - "fzf"
+      - "eza"
+      - "bat"
+      - "fd"
+      - "gnupg"
+      - "jaq"
+      - "tlrc"
+      - "lesspipe"
+      - "exiftool"
+      # Tools
+      - "btop"
+      - "sheldon"
+      - "git-delta"
+      - "bitwarden-cli"
+      - "mise"
+      - "fastfetch"
+    casks:
+      - "finetune" # Improve sound management
+      - "TheBoredTeam/boring-notch/boring-notch" # Improve notch
+      - "ghostty"
+      - "orbstack"
+      - "visual-studio-code"
+      - "brave-browser"
+      - "vesktop"
+      # Font for code
+      - "font-fira-code-nerd-font"
+      # Font for terminal
+      - "font-meslo-for-powerlevel10k"
+      - "font-noto-nerd-font"
+      - "font-roboto-mono-nerd-font"

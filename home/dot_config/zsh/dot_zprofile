@@ -6,6 +6,27 @@
 
 typeset -x ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zcompdump"
 
+
+#----------------------
+# macOS Specific
+#----------------------
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  typeset -x PATH="${HOME}/.local/bin:$PATH"
+
+  if [[ -x /opt/homebrew/bin/brew ]]; then
+    typeset -x HOMEBREW_NO_ANALYTICS=1;
+    typeset -x HOMEBREW_PREFIX="/opt/homebrew";
+    typeset -x HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+    typeset -x HOMEBREW_REPOSITORY="/opt/homebrew";
+    typeset -x fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+
+    eval "$(/usr/bin/env PATH_HELPER_ROOT="/opt/homebrew" /usr/libexec/path_helper -s)"
+    [ -z "${MANPATH-}" ] || typeset -x MANPATH=":${MANPATH#:}";
+    typeset -x INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+  fi
+fi
+
 #----------------------
 # User ZSH completions
 #----------------------

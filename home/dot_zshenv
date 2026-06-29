@@ -2,9 +2,9 @@
 #----------------------
 # .zshenv - Zsh environment file, loaded always.
 #----------------------
-# If first shell (SHLVL=1) and it's not a login shell, then source .profile if it exists.
-# ? This is to ensure that the environment is set up correctly for non-login shells (e.g. ssh).
-[[ ("$SHLVL" -eq 1 && ! -o LOGIN) && -s "./.profile" ]] && source "./.profile"
+# If first shell (SHLVL=1) and variable not defined, then source .profile if it exists.
+# ? This is to ensure that the environment is set up correctly for shells.
+[[ ("$SHLVL" -eq 1 && -z "${XDG_CONFIG_HOME}") && -s "./.profile" ]] && source "./.profile"
 
 # Redirect ZSH file in `.config/zsh`
 export ZDOTDIR="$HOME/.config/zsh"
