@@ -32,4 +32,8 @@ _provision_key() {
 _provision_key "personal-ssh" "id_ed25519"
 _provision_key "github-ssh" "github_ed25519"
 
+# Private ssh config from "attachment"
+ITEM_ID="$(bw get item "ssh-config" | _jq -r .id)"
+bw get attachment "homelab.conf" --itemid "$ITEM_ID" --output ~/.ssh/config.d/homelab.conf
+
 success "SSH keys imported Successfully"
