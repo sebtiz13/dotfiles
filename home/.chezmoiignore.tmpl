@@ -3,6 +3,7 @@ assets
 # Ignore these files if is not darwin install (macOS)
 {{ if ne .chezmoi.os "darwin" }}
 .chezmoiscripts/darwin/**
+Library
 {{ end }}
 
 # Ignore these files if is not linux install
