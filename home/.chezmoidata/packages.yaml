@@ -15,7 +15,7 @@ packages:
     # Tools
     - "bitwarden-cli-bin"
     - "gnupg"
-    - "mise"
+    - "mise-bin"
     - "usage" # needed for mise completion but optionnal so not automatically installed
     - "grammalecte"
     # Applications
