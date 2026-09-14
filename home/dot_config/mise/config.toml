@@ -11,12 +11,13 @@ experimental = true
 
 [tools]
 chezmoi = "2.72.1"
-flux2 = "latest"
+flux2 = "2.9.5"
 "github:alltuner/mise-completions-sync" = "latest"
-helm = "latest"
-kubectl = "latest"
-shellcheck = "latest"
-uv = "latest"
+helm = "4.3.0"
+kubectl = "1.37.0"
+pi = "0.85.1"
+shellcheck = "0.11.0"
+uv = "0.12.13"
 
 [hooks]
 postinstall = "misecompsync --shell zsh"
