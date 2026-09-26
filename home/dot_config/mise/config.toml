@@ -15,7 +15,7 @@ flux2 = "2.9.5"
 "github:alltuner/mise-completions-sync" = "latest"
 helm = "4.3.0"
 kubectl = "1.37.1"
-pi = "0.87.1"
+pi = { version = "0.87.1", postinstall = "npx pi-completion zsh > ${XDG_DATA_HOME:-$HOME/.local/share}/mise-completions/zsh/_pi" }
 shellcheck = "0.11.0"
 uv = "0.12.19"
 
