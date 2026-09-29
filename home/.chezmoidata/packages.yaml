@@ -12,6 +12,7 @@ packages:
     - "tlrc-bin"
     - "lesspipe"
     - "perl-image-exiftool"
+    - "tmux"
     # Tools
     - "bitwarden-cli-bin"
     - "gnupg"

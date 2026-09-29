@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# {{ template "scripts-library" }}
+
+TPM_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/tmux/plugins/tpm"
+
+# Exit quietly if TPM is already installed
+if [ -d "$TPM_DIR" ]; then
+  info "TPM already installed, skipping."
+  exit 0
+fi
+
+info "Install Tmux plugins"
+
+# Install TPM
+git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+
+# Install plugins declared in the tmux config (headless, no interactive session)
+# TPM reads TMUX_PLUGIN_MANAGER_PATH to know where to put plugins
+export TMUX_PLUGIN_MANAGER_PATH="$(dirname "$TPM_DIR")/"
+
+# Start a detached server with a throwaway session so tmux can source the config
+# (plugin declarations are read from the config by TPM)
+tmux start-server
+tmux new-session -d -s chezmoi-tpm-install
+
+# Source the config if it is not loaded automatically
+if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" ]; then
+  tmux source-file "${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" || true
+fi
+
+# Run TPM's non-interactive plugin installer
+"$TPM_DIR/bin/install_plugins"
+
+# Clean up the temporary session and server
+tmux kill-server || true
+
+success "Tmux plugins installed"
