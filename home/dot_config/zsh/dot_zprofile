@@ -34,7 +34,7 @@ fi
 #----------------------
 # User ZSH completions
 #----------------------
-typeset -x fpath=(${XDG_DATA_HOME:-$HOME/.local/share}/mise-completions/zsh $fpath)
+typeset -x fpath=(${XDG_DATA_HOME:-$HOME/.local/share}/mise-completions/zsh ${ZDOTDIR:-$HOME}/completions $fpath)
 
 #----------------------
 # System Configuration
